@@ -100,7 +100,11 @@ $modulList = $stmtModul->get_result();
                 AND modul_id = ?
                 ORDER BY tanggal_upload DESC
                 ");
-                $cekLaporan->bind_param("ii", $user_id, $modul['id']);
+                $cekLaporan->bind_param(
+                    "ii", 
+                    $user_id, 
+                    $modul['id']
+                );
                 $cekLaporan->execute();
                 $laporanResult = $cekLaporan->get_result();
 
