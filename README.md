@@ -26,3 +26,6 @@
 
 - Laporan Masuk
 ![Laporan Masuk](/readme_images/preview-laporan-masuk.png)
+
+- Nilai Laporan
+![Nilai Laporan](/readme_images/preview-nilai-laporan.png)

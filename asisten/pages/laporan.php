@@ -8,7 +8,10 @@ $limit = 10;
 $offset = ($page - 1) * $limit;
 
 if ($_SESSION['role'] !== 'asisten') {
-    die("Akses hanya untuk asisten! Hmph.");
+    die("<h1 style='color: red; 
+            text-align: center;'>
+            Akses hanya untuk asisten!
+         </h1>");
 }
 
 $total_result = $conn->query("
@@ -222,7 +225,7 @@ $laporan = $stmt->get_result();
                     <?= htmlspecialchars($row['tanggal_upload']) ?>
                 </td>
                 <td class="p-2 border border-gray-400">
-                    <a href="/asisten/pages/beri_nilai.php?id=<?= $row['id'] ?>"
+                    <a href="/asisten/pages/nilai.php?id=<?= $row['id'] ?>"
                         class="bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500">Nilai</a>
                 </td>
             </tr>
