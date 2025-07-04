@@ -9,3 +9,6 @@
 
 - Dashboard
 ![Dashboard](/readme-images/preview-dashboard.png)
+
+- Courses Mahasiswa
+![Courses Mahasiswa](/readme-images/preview-courses-mahasiswa.png)
