@@ -2,20 +2,49 @@
 session_start();
 require dirname(__DIR__, 2) . '/config.php';
 
-// Cek role, pastikan asisten
+$page = intval($_GET['page'] ?? 1);
+if ($page < 1) $page = 1;
+$limit = 10;
+$offset = ($page - 1) * $limit;
+
 if ($_SESSION['role'] !== 'asisten') {
     die("Akses hanya untuk asisten! Hmph.");
 }
 
-$modulList = $conn->query("SELECT id, nama_modul FROM modul_praktikum");
+$total_result = $conn->query("
+        SELECT COUNT(*) AS total 
+        FROM laporan_mahasiswa 
+        WHERE 1=1
+        ");
+$total_data = $total_result->fetch_assoc()['total'];
 
-$mahasiswaList = $conn->query("SELECT id, nama FROM users WHERE role = 'mahasiswa'");
+$total_pages = ceil($total_data / $limit);
+
+$modulList = $conn->query("
+        SELECT id, nama_modul 
+        FROM modul_praktikum
+        ");
+
+$mahasiswaList = $conn->query("
+        SELECT id, nama FROM users 
+        WHERE role = 'mahasiswa'
+        ");
 
 
-// Ambil filter kalau ada
 $filter_modul = intval($_GET['modul'] ?? 0);
 $filter_user = intval($_GET['mahasiswa'] ?? 0);
 $filter_status = $_GET['status'] ?? '';
+
+$sort_column = $_GET['sort'] ?? 'tanggal_upload';
+$sort_order = strtolower($_GET['order'] ?? 'desc');
+
+$allowed_columns = ['nama_mahasiswa', 'nama_modul', 'nilai', 'tanggal_upload'];
+if (!in_array($sort_column, $allowed_columns)) {
+    $sort_column = 'tanggal_upload';
+}
+if (!in_array($sort_order, ['asc', 'desc'])) {
+    $sort_order = 'desc';
+}
 
 $sql = "SELECT 
             l.id, 
@@ -33,21 +62,44 @@ $sql = "SELECT
 $params = [];
 $types = '';
 
+$total_sql = "SELECT COUNT(*) AS total FROM laporan_mahasiswa l WHERE 1=1";
+$total_params = [];
+$total_types = '';
+
 if ($filter_modul) {
-    $sql .= " AND l.modul_id = ?";
-    $params[] = $filter_modul;
-    $types .= 'i';
+    $total_sql .= " AND l.modul_id = ?";
+    $total_params[] = $filter_modul;
+    $total_types .= 'i';
 }
 if ($filter_user) {
-    $sql .= " AND l.user_id = ?";
-    $params[] = $filter_user;
-    $types .= 'i';
+    $total_sql .= " AND l.user_id = ?";
+    $total_params[] = $filter_user;
+    $total_types .= 'i';
 }
 if ($filter_status === 'belum') {
-    $sql .= " AND l.nilai IS NULL";
+    $total_sql .= " AND l.nilai IS NULL";
 } elseif ($filter_status === 'sudah') {
-    $sql .= " AND l.nilai IS NOT NULL";
+    $total_sql .= " AND l.nilai IS NOT NULL";
 }
+
+$total_stmt = $conn->prepare($total_sql);
+if ($total_params) {
+    $total_stmt->bind_param(
+        $total_types,
+        ...$total_params
+    );
+}
+$total_stmt->execute();
+$total_result = $total_stmt->get_result();
+$total_data = $total_result->fetch_assoc()['total'];
+
+$total_pages = ceil($total_data / $limit);
+
+$sql .= " ORDER BY $sort_column $sort_order";
+$sql .= " LIMIT ? OFFSET ?";
+$params[] = $limit;
+$params[] = $offset;
+$types .= 'ii';
 
 $stmt = $conn->prepare($sql);
 
@@ -122,11 +174,32 @@ $laporan = $stmt->get_result();
     <table class="table-auto w-full border border-gray-400 border-collapse divide-y divide-gray-300">
         <thead>
             <tr class="bg-gray-100">
-                <th class="p-2 border border-gray-400">Mahasiswa</th>
-                <th class="p-2 border border-gray-400">Modul</th>
+                <th class="p-2 border border-gray-400">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nama_mahasiswa', 'order' => ($sort_column == 'nama_mahasiswa' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                        Mahasiswa
+                        <?= $sort_column == 'nama_mahasiswa' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
+                    </a>
+                </th>
+                <th class="p-2 border border-gray-400">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nama_modul', 'order' => ($sort_column == 'nama_modul' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                        Modul
+                        <?= $sort_column == 'nama_modul' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
+                    </a>
+                </th>
                 <th class="p-2 border border-gray-400">File</th>
-                <th class="p-2 border border-gray-400">Nilai</th>
+                <th class="p-2 border border-gray-400">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nilai', 'order' => ($sort_column == 'nilai' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                        Nilai
+                        <?= $sort_column == 'nilai' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
+                    </a>
+                </th>
                 <th class="p-2 border border-gray-400">Feedback</th>
+                <th class="p-2 border border-gray-400">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'tanggal_upload', 'order' => ($sort_column == 'tanggal_upload' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                        Tanggal Upload
+                        <?= $sort_column == 'tanggal_upload' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
+                    </a>
+                </th>
                 <th class="p-2 border border-gray-400">Aksi</th>
             </tr>
         </thead>
@@ -140,9 +213,13 @@ $laporan = $stmt->get_result();
                         class="text-blue-600 hover:underline">Unduh</a>
                 </td>
                 <td class="p-2 border border-gray-400">
-                    <?= is_null($row['nilai']) ? 'Belum Dinilai' : htmlspecialchars($row['nilai']) ?></td>
+                    <?= is_null($row['nilai']) ? 'Belum Dinilai' : htmlspecialchars($row['nilai']) ?>
+                </td>
                 <td class="p-2 border border-gray-400">
                     <?= !empty($row['feedback']) ? htmlspecialchars($row['feedback']) : '<span class="text-gray-400">-</span>' ?>
+                </td>
+                <td class="p-2 border border-gray-400">
+                    <?= htmlspecialchars($row['tanggal_upload']) ?>
                 </td>
                 <td class="p-2 border border-gray-400">
                     <a href="/asisten/pages/beri_nilai.php?id=<?= $row['id'] ?>"
@@ -152,6 +229,14 @@ $laporan = $stmt->get_result();
             <?php endwhile; ?>
         </tbody>
     </table>
+    <div class="mt-4 flex justify-center space-x-2">
+        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+            <a href="?<?= http_build_query(array_merge($_GET, ['page' => $i])) ?>"
+                class="px-3 py-1 rounded <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-gray-300' ?>">
+                <?= $i ?>
+            </a>
+        <?php endfor; ?>
+    </div>
 </body>
 
 </html>
