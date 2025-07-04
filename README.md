@@ -2,13 +2,19 @@
 
 ### Fitur:
 - Login
-![Login](/readme-images/preview-login.png)
+![Login](/readme_images/preview-login.png)
 
 - Register
-![Register](/readme-images/preview-register.png)
+![Register](/readme_images/preview-register.png)
 
 - Dashboard
-![Dashboard](/readme-images/preview-dashboard.png)
+![Dashboard](/readme_images/preview-dashboard.png)
 
-- Courses Mahasiswa
-![Courses Mahasiswa](/readme-images/preview-courses-mahasiswa.png)
+- List Courses Mahasiswa
+![List Courses Mahasiswa](/readme_images/preview-list-courses-mahasiswa.png)
+
+- My Courses Mahasiswa
+![My Courses Mahasiswa](/readme_images/preview-my-courses-mahasiswa.png)
+
+- Detail Courses Mahasiswa
+![Detail Courses Mahasiswa](/readme_images/preview-detail-courses-mahasiswa.png)

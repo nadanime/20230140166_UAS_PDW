@@ -33,7 +33,7 @@ $result = $conn->query($sql);
                 <span class="text-sm text-gray-500">Semester: <?= htmlspecialchars($row['semester']) ?></span>
 
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <form action="/mahasiswa/server/daftar-praktikum.php" method="POST" class="mt-2">
+                    <form action="/mahasiswa/server/daftar_praktikum.php" method="POST" class="mt-2">
                         <input type="hidden" name="praktikum_id" value="<?= $row['id'] ?>">
                         <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Daftar</button>
                     </form>

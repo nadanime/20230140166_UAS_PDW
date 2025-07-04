@@ -29,3 +29,14 @@ CREATE TABLE praktikum_mahasiswa (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (praktikum_id) REFERENCES praktikum(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Menyimpan modul praktikum yang terkait dengan praktikum
+CREATE TABLE modul_praktikum (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    praktikum_id INT NOT NULL,
+    nama_modul VARCHAR(255) NOT NULL,
+    deskripsi TEXT,
+    file_materi VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (praktikum_id) REFERENCES praktikum(id) ON DELETE CASCADE
+);
