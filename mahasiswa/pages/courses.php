@@ -17,6 +17,12 @@ $result = $conn->query($sql);
 </head>
 
 <body class="p-6">
+    <div class="mb-10">
+        <a href="/mahasiswa/dashboard.php" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">
+            Kembali ke Dashboard
+        </a>
+    </div>
+
     <h1 class="text-2xl font-bold mb-4">Daftar Mata Praktikum</h1>
 
     <?php if (!empty($_SESSION['success'])): ?>

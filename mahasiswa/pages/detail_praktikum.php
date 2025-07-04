@@ -65,15 +65,14 @@ $modulList = $stmtModul->get_result();
 </head>
 
 <body class="p-6">
-    <h1 class="text-2xl font-bold mb-4"><?= htmlspecialchars($praktikum['nama_praktikum']) ?></h1>
-    <p class="mb-4"><?= htmlspecialchars($praktikum['deskripsi']) ?></p>
-
-    <div class="mt-6">
+    <div class="mb-10">
         <a href="/mahasiswa/pages/my_courses.php" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">
             Kembali ke Daftar Praktikum
         </a>
     </div>
-    <br>
+
+    <h1 class="text-2xl font-bold mb-4"><?= htmlspecialchars($praktikum['nama_praktikum']) ?></h1>
+    <p class="mb-4"><?= htmlspecialchars($praktikum['deskripsi']) ?></p>
 
     <h2 class="text-xl font-semibold mb-2">Daftar Modul</h2>
 
