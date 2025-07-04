@@ -29,3 +29,15 @@
 
 - Nilai Laporan
 ![Nilai Laporan](/readme_images/preview-nilai-laporan.png)
+
+- Kelola Mata Praktikum
+![Kelola Mata Praktikum](/readme_images/preview-kelola-mata-praktikum.png)
+
+- Tambah Praktikum
+![Tambah Praktikum](/readme_images/preview-tambah-praktikum.png)
+
+- Edit Praktikum
+![Edit Praktikum](/readme_images/preview-edit-praktikum.png)
+
+- Hapus Praktikum
+![Hapus Praktikum](/readme_images/preview-hapus-praktikum.png)

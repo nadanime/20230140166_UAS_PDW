@@ -57,13 +57,11 @@ $modulList = $stmtModul->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($praktikum['nama_praktikum']) ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="p-6">
     <div class="mb-10">
         <a href="/mahasiswa/pages/my_courses.php" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">

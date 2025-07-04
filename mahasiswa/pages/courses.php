@@ -9,13 +9,11 @@ $result = $conn->query($sql);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Katalog Praktikum</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
 <body class="p-6">
     <div class="mb-10">
         <a href="/mahasiswa/dashboard.php" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">

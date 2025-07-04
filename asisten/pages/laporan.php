@@ -3,7 +3,8 @@ session_start();
 require dirname(__DIR__, 2) . '/config.php';
 
 $page = intval($_GET['page'] ?? 1);
-if ($page < 1) $page = 1;
+if ($page < 1)
+    $page = 1;
 $limit = 10;
 $offset = ($page - 1) * $limit;
 
@@ -108,7 +109,7 @@ $stmt = $conn->prepare($sql);
 
 if ($params) {
     $stmt->bind_param(
-        $types, 
+        $types,
         ...$params
     );
 }
@@ -141,9 +142,9 @@ $laporan = $stmt->get_result();
             <select name="modul" class="border rounded px-2 py-1">
                 <option value="">Semua</option>
                 <?php while ($modul = $modulList->fetch_assoc()): ?>
-                <option value="<?= $modul['id'] ?>" <?= ($filter_modul == $modul['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($modul['nama_modul']) ?>
-                </option>
+                    <option value="<?= $modul['id'] ?>" <?= ($filter_modul == $modul['id']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($modul['nama_modul']) ?>
+                    </option>
                 <?php endwhile; ?>
             </select>
         </div>
@@ -153,9 +154,9 @@ $laporan = $stmt->get_result();
             <select name="mahasiswa" class="border rounded px-2 py-1">
                 <option value="">Semua</option>
                 <?php while ($mhs = $mahasiswaList->fetch_assoc()): ?>
-                <option value="<?= $mhs['id'] ?>" <?= ($filter_user == $mhs['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($mhs['nama']) ?>
-                </option>
+                    <option value="<?= $mhs['id'] ?>" <?= ($filter_user == $mhs['id']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($mhs['nama']) ?>
+                    </option>
                 <?php endwhile; ?>
             </select>
         </div>
@@ -178,27 +179,31 @@ $laporan = $stmt->get_result();
         <thead>
             <tr class="bg-gray-100">
                 <th class="p-2 border border-gray-400">
-                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nama_mahasiswa', 'order' => ($sort_column == 'nama_mahasiswa' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nama_mahasiswa', 'order' => ($sort_column == 'nama_mahasiswa' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>"
+                        class="hover:underline">
                         Mahasiswa
                         <?= $sort_column == 'nama_mahasiswa' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
                     </a>
                 </th>
                 <th class="p-2 border border-gray-400">
-                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nama_modul', 'order' => ($sort_column == 'nama_modul' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nama_modul', 'order' => ($sort_column == 'nama_modul' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>"
+                        class="hover:underline">
                         Modul
                         <?= $sort_column == 'nama_modul' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
                     </a>
                 </th>
                 <th class="p-2 border border-gray-400">File</th>
                 <th class="p-2 border border-gray-400">
-                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nilai', 'order' => ($sort_column == 'nilai' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'nilai', 'order' => ($sort_column == 'nilai' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>"
+                        class="hover:underline">
                         Nilai
                         <?= $sort_column == 'nilai' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
                     </a>
                 </th>
                 <th class="p-2 border border-gray-400">Feedback</th>
                 <th class="p-2 border border-gray-400">
-                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'tanggal_upload', 'order' => ($sort_column == 'tanggal_upload' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>" class="hover:underline">
+                    <a href="?<?= http_build_query(array_merge($_GET, ['sort' => 'tanggal_upload', 'order' => ($sort_column == 'tanggal_upload' && $sort_order == 'asc') ? 'desc' : 'asc'])) ?>"
+                        class="hover:underline">
                         Tanggal Upload
                         <?= $sort_column == 'tanggal_upload' ? ($sort_order == 'asc' ? '▲' : '▼') : '' ?>
                     </a>
@@ -208,27 +213,27 @@ $laporan = $stmt->get_result();
         </thead>
         <tbody>
             <?php while ($row = $laporan->fetch_assoc()): ?>
-            <tr>
-                <td class="p-2 border border-gray-400"><?= htmlspecialchars($row['nama_mahasiswa']) ?></td>
-                <td class="p-2 border border-gray-400"><?= htmlspecialchars($row['nama_modul']) ?></td>
-                <td class="p-2 border border-gray-400">
-                    <a href="/uploads/laporan/<?= htmlspecialchars($row['file_laporan']) ?>" download
-                        class="text-blue-600 hover:underline">Unduh</a>
-                </td>
-                <td class="p-2 border border-gray-400">
-                    <?= is_null($row['nilai']) ? 'Belum Dinilai' : htmlspecialchars($row['nilai']) ?>
-                </td>
-                <td class="p-2 border border-gray-400">
-                    <?= !empty($row['feedback']) ? htmlspecialchars($row['feedback']) : '<span class="text-gray-400">-</span>' ?>
-                </td>
-                <td class="p-2 border border-gray-400">
-                    <?= htmlspecialchars($row['tanggal_upload']) ?>
-                </td>
-                <td class="p-2 border border-gray-400">
-                    <a href="/asisten/pages/nilai.php?id=<?= $row['id'] ?>"
-                        class="bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500">Nilai</a>
-                </td>
-            </tr>
+                <tr>
+                    <td class="p-2 border border-gray-400"><?= htmlspecialchars($row['nama_mahasiswa']) ?></td>
+                    <td class="p-2 border border-gray-400"><?= htmlspecialchars($row['nama_modul']) ?></td>
+                    <td class="p-2 border border-gray-400">
+                        <a href="/uploads/laporan/<?= htmlspecialchars($row['file_laporan']) ?>" download
+                            class="text-blue-600 hover:underline">Unduh</a>
+                    </td>
+                    <td class="p-2 border border-gray-400">
+                        <?= is_null($row['nilai']) ? 'Belum Dinilai' : htmlspecialchars($row['nilai']) ?>
+                    </td>
+                    <td class="p-2 border border-gray-400">
+                        <?= !empty($row['feedback']) ? htmlspecialchars($row['feedback']) : '<span class="text-gray-400">-</span>' ?>
+                    </td>
+                    <td class="p-2 border border-gray-400">
+                        <?= htmlspecialchars($row['tanggal_upload']) ?>
+                    </td>
+                    <td class="p-2 border border-gray-400">
+                        <a href="/asisten/pages/nilai.php?id=<?= $row['id'] ?>"
+                            class="bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500">Nilai</a>
+                    </td>
+                </tr>
             <?php endwhile; ?>
         </tbody>
     </table>
