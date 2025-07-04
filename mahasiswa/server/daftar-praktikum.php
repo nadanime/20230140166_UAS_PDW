@@ -22,7 +22,9 @@ $cek->execute();
 $cek_result = $cek->get_result();
 
 if ($cek_result->num_rows > 0) {
-    die("Kamu sudah terdaftar di praktikum ini!");
+    $_SESSION['sudah_daftar'] = "Kamu sudah terdaftar di praktikum ini!";
+    header("Location: /mahasiswa/pages/courses.php");
+    exit;
 }
 
 $stmt = $conn->prepare("
@@ -36,7 +38,9 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    header("Location: /pages/courses.php?success=1");
+    $_SESSION['success'] = "Berhasil daftar!";
+    header("Location: /mahasiswa/pages/courses.php");
+    exit;
 } else {
     die("Gagal mendaftar: " . $conn->error);
 }

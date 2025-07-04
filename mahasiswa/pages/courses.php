@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require dirname(__DIR__, 1) . '/config.php';
+require dirname(__DIR__, 2) . '/config.php';
 
 $sql = "SELECT * FROM praktikum";
 $result = $conn->query($sql);
@@ -18,6 +18,12 @@ $result = $conn->query($sql);
 
 <body class="p-6">
     <h1 class="text-2xl font-bold mb-4">Daftar Mata Praktikum</h1>
+
+    <?php if (!empty($_SESSION['success'])): ?>
+        <div class="text-green-600 mb-4"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
+    <?php elseif (!empty($_SESSION['sudah_daftar'])): ?>
+        <div class="text-red-600 mb-4"><?= $_SESSION['sudah_daftar']; unset($_SESSION['sudah_daftar']); ?></div>
+    <?php endif; ?>
 
     <div class="grid gap-4 grid-cols-1 md:grid-cols-3">
         <?php while ($row = $result->fetch_assoc()): ?>
