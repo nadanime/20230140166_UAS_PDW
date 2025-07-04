@@ -39,4 +39,18 @@ CREATE TABLE modul_praktikum (
     file_materi VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (praktikum_id) REFERENCES praktikum(id) ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- Menyimpan laporan mahasiswa
+CREATE TABLE laporan_mahasiswa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    modul_id INT NOT NULL,
+    file_laporan VARCHAR(255),
+    nilai INT DEFAULT NULL,
+    feedback TEXT DEFAULT NULL,
+    tanggal_upload TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (modul_id) REFERENCES modul_praktikum(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

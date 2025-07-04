@@ -3,7 +3,10 @@ session_start();
 require dirname(__DIR__, 2) . '/config.php';
 
 if (!isset($_SESSION['user_id'])) {
-    die("Harus login dulu!");
+    die("<h1 style='color: red; 
+             text-align: center;'>
+             Harus login dulu!
+         </h1>");
 }
 
 $user_id = $_SESSION['user_id'];
@@ -42,5 +45,7 @@ if ($stmt->execute()) {
     header("Location: /mahasiswa/pages/courses.php");
     exit;
 } else {
-    die("Gagal mendaftar: " . $conn->error);
+    die("<h1 style='color: red; 
+             text-align: center;'>Gagal mendaftar: " . $conn->error . "
+         </h1>");
 }

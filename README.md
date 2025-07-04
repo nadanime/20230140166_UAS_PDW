@@ -18,3 +18,6 @@
 
 - Detail Courses Mahasiswa
 ![Detail Courses Mahasiswa](/readme_images/preview-detail-courses-mahasiswa.png)
+
+- Upload Laporan
+![Upload Laporan](/readme_images/preview-upload-laporan.png)
