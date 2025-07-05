@@ -53,3 +53,15 @@
 
 - Hapus Modul
 ![Hapus Modul](/readme_images/preview-hapus-modul.png)
+
+- Kelola Pengguna
+![Kelola Pengguna](/readme_images/preview-kelola-pengguna.png)
+
+- Tambah Pengguna
+![Tambah Pengguna](/readme_images/preview-tambah-pengguna.png)
+
+- Edit Pengguna
+![Edit Pengguna](/readme_images/preview-edit-pengguna.png)
+
+- Hapus Pengguna
+![Hapus Pengguna](/readme_images/preview-hapus-pengguna.png)
