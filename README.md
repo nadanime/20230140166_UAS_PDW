@@ -1,5 +1,12 @@
 # SIMPRAK (Sistem Informasi Manajemen Praktikum)
 
+## Demo Aplikasi:
+[Tekan Disini](https://simprak.nadanime.com)
+### Atau
+<a href="https://simprak.nadanime.com">
+  <img src="https://img.shields.io/badge/Klik%20di%20sini-🔗%20Lihat%20Demo-blue?style=for-the-badge" alt="Tombol Besar"/>
+</a>
+
 ## Fitur:
 - Login
 ![Login](/readme_images/preview-login.png)
