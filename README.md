@@ -1,4 +1,4 @@
-# SIMPRAK
+# SIMPRAK (Sistem Informasi Manajemen Praktikum)
 
 ## Fitur:
 - Login
@@ -41,3 +41,15 @@
 
 - Hapus Praktikum
 ![Hapus Praktikum](/readme_images/preview-hapus-praktikum.png)
+
+- Kelola Modul Praktikum
+![Kelola Modul Praktikum](/readme_images/preview-kelola-modul-praktikum.png)
+
+- Tambah Modul
+![Tambah Modul](/readme_images/preview-tambah-modul.png)
+
+- Edit Modul
+![Edit Modul](/readme_images/preview-edit-modul.png)
+
+- Hapus Modul
+![Hapus Modul](/readme_images/preview-hapus-modul.png)

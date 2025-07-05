@@ -57,11 +57,13 @@ $modulList = $stmtModul->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title><?= htmlspecialchars($praktikum['nama_praktikum']) ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="p-6">
     <div class="mb-10">
         <a href="/mahasiswa/pages/my_courses.php" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">
@@ -99,8 +101,8 @@ $modulList = $stmtModul->get_result();
                 ORDER BY tanggal_upload DESC
                 ");
                 $cekLaporan->bind_param(
-                    "ii", 
-                    $user_id, 
+                    "ii",
+                    $user_id,
                     $modul['id']
                 );
                 $cekLaporan->execute();
@@ -122,7 +124,7 @@ $modulList = $stmtModul->get_result();
                     <div class="mt-2 text-sm">
                         <?php foreach ($laporanList as $laporan): ?>
                             ✅ Laporan dikumpulkan:
-                            <a href="/uploads/laporan/<?= htmlspecialchars($laporan['file_laporan']) ?>" target="_blank"
+                            <a href="/uploads/laporan_praktikum/<?= htmlspecialchars($laporan['file_laporan']) ?>" target="_blank"
                                 class="text-blue-600 underline">
                                 <?= htmlspecialchars($laporan['file_laporan']) ?>
                             </a><br>

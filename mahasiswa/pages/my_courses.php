@@ -20,7 +20,7 @@ $stmt = $conn->prepare("
         WHERE pm.user_id = ?
         ");
 $stmt->bind_param(
-    "i", 
+    "i",
     $user_id
 );
 $stmt->execute();
@@ -29,11 +29,13 @@ $result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Praktikum Saya</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="p-6">
     <div class="mb-10">
         <a href="/mahasiswa/dashboard.php" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">
@@ -51,7 +53,8 @@ $result = $stmt->get_result();
                 <span class="text-sm text-gray-500">Semester: <?= htmlspecialchars($row['semester']) ?></span>
 
                 <div class="mt-2">
-                    <a href="detail_praktikum.php?id=<?= $row['id'] ?>" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+                    <a href="detail_praktikum.php?id=<?= $row['id'] ?>"
+                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
                         Lihat Detail
                     </a>
                 </div>
@@ -59,4 +62,5 @@ $result = $stmt->get_result();
         <?php endwhile; ?>
     </div>
 </body>
+
 </html>

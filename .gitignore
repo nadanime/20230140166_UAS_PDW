@@ -1,4 +1,4 @@
 .env
 vendor/
 uploads/modul_praktikum/*
-uploads/laporan/*
+uploads/laporan_praktikum/*

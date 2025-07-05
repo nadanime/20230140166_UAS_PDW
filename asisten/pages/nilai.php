@@ -48,7 +48,7 @@ if (!$laporan) {
 
     <p><strong>Mahasiswa:</strong> <?= htmlspecialchars($laporan['nama_mahasiswa']) ?></p>
     <p><strong>Modul:</strong> <?= htmlspecialchars($laporan['nama_modul']) ?></p>
-    <p><strong>File:</strong> <a href="/uploads/laporan/<?= htmlspecialchars($laporan['file_laporan']) ?>" download class="text-blue-600 hover:underline">Unduh Laporan</a></p>
+    <p><strong>File:</strong> <a href="/uploads/laporan_praktikum/<?= htmlspecialchars($laporan['file_laporan']) ?>" download class="text-blue-600 hover:underline">Unduh Laporan</a></p>
 
     <form action="/asisten/server/proses_nilai.php" method="POST" class="mt-4 space-y-3">
         <input type="hidden" name="laporan_id" value="<?= $laporan_id ?>">

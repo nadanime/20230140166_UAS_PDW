@@ -19,7 +19,7 @@ if (!isset($_FILES['laporan']) || $_FILES['laporan']['error'] !== UPLOAD_ERR_OK)
          </h1>");
 }
 
-$target_dir = dirname(__DIR__, 2) . "/uploads/laporan/";
+$target_dir = dirname(__DIR__, 2) . "/uploads/laporan_praktikum/";
 $filename = time() . "_" . basename($_FILES["laporan"]["name"]);
 $target_file = $target_dir . $filename;
 
@@ -35,9 +35,11 @@ $stmt = $conn->prepare("
         (user_id, modul_id, file_laporan) 
         VALUES (?, ?, ?)");
 $stmt->bind_param(
-    "iis", 
-    $user_id, 
-    $modul_id, $filename);
+    "iis",
+    $user_id,
+    $modul_id,
+    $filename
+);
 
 if ($stmt->execute()) {
     $stmt = $conn->prepare("
@@ -45,7 +47,7 @@ if ($stmt->execute()) {
     FROM modul_praktikum WHERE id = ?
     ");
     $stmt->bind_param(
-        "i", 
+        "i",
         $modul_id
     );
     $stmt->execute();

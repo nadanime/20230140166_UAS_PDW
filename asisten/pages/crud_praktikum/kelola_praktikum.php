@@ -27,16 +27,19 @@ $praktikum = $conn->query("SELECT * FROM praktikum");
             Kembali ke Dashboard
         </a>
     </div>
-    
+
     <h1 class="text-2xl font-bold mb-4">Kelola Mata Praktikum</h1>
 
-    <a href="/asisten/pages/crud_praktikum/tambah_praktikum.php" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Tambah
+    <a href="/asisten/pages/crud_praktikum/tambah_praktikum.php"
+        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Tambah
         Praktikum</a>
 
     <?php if (!empty($_SESSION['success'])): ?>
-        <div class="text-green-600 mb-6 mt-6"><?= $_SESSION['success']; unset($_SESSION['success']); ?></div>
+        <div class="text-green-600 mb-6 mt-6"><?= $_SESSION['success'];
+        unset($_SESSION['success']); ?></div>
     <?php elseif (!empty($_SESSION['error'])): ?>
-        <div class="text-red-600 mb-6 mt-6"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
+        <div class="text-red-600 mb-6 mt-6"><?= $_SESSION['error'];
+        unset($_SESSION['error']); ?></div>
     <?php endif; ?>
 
     <table class="table-auto w-full mt-4 border">
@@ -57,9 +60,9 @@ $praktikum = $conn->query("SELECT * FROM praktikum");
                     <td class="p-2 space-x-2">
                         <a href="/asisten/pages/crud_praktikum/edit_praktikum.php?id=<?= $row['id'] ?>"
                             class="bg-yellow-400 px-2 py-1 rounded hover:bg-yellow-500">Edit</a>
-                        <a href="#" 
-                           onclick="openDeleteModal(<?= $row['id'] ?>, '<?= htmlspecialchars(addslashes($row['nama_praktikum'])) ?>'); return false;"
-                           class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Hapus</a>
+                        <a href="#"
+                            onclick="openDeleteModal(<?= $row['id'] ?>, '<?= htmlspecialchars(addslashes($row['nama_praktikum'])) ?>'); return false;"
+                            class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Hapus</a>
                     </td>
                 </tr>
             <?php endwhile; ?>
@@ -75,22 +78,24 @@ $praktikum = $conn->query("SELECT * FROM praktikum");
                 <label class="block mb-2 text-sm">Masukkan password Anda untuk konfirmasi:</label>
                 <input type="password" name="password" required class="border rounded px-2 py-1 w-full mb-4">
                 <div class="flex justify-end space-x-2">
-                    <button type="button" onclick="closeDeleteModal()" class="px-3 py-1 rounded bg-gray-300 hover:bg-gray-400">Batal</button>
-                    <button type="submit" class="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">Hapus</button>
+                    <button type="button" onclick="closeDeleteModal()"
+                        class="px-3 py-1 rounded bg-gray-300 hover:bg-gray-400">Batal</button>
+                    <button type="submit"
+                        class="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">Hapus</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-    function openDeleteModal(id, nama) {
-        document.getElementById('praktikumId').value = id;
-        document.getElementById('modalText').innerText = `Anda yakin ingin menghapus praktikum "${nama}"? Tindakan ini tidak dapat dibatalkan.`;
-        document.getElementById('deleteModal').classList.remove('hidden');
-    }
-    function closeDeleteModal() {
-        document.getElementById('deleteModal').classList.add('hidden');
-    }
+        function openDeleteModal(id, nama) {
+            document.getElementById('praktikumId').value = id;
+            document.getElementById('modalText').innerText = `Anda yakin ingin menghapus praktikum "${nama}"? Tindakan ini tidak dapat dibatalkan.`;
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
     </script>
 </body>
 

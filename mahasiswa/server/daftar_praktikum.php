@@ -17,8 +17,8 @@ SELECT * FROM praktikum_mahasiswa
 WHERE user_id = ? AND praktikum_id = ?
 ");
 $cek->bind_param(
-    "ii", 
-    $user_id, 
+    "ii",
+    $user_id,
     $praktikum_id
 );
 $cek->execute();
@@ -35,8 +35,8 @@ INSERT INTO praktikum_mahasiswa
 (user_id, praktikum_id) VALUES (?, ?)
 ");
 $stmt->bind_param(
-    "ii", 
-    $user_id, 
+    "ii",
+    $user_id,
     $praktikum_id
 );
 

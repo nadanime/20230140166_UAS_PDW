@@ -67,7 +67,7 @@ if (!$praktikum) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Tambah Praktikum</title>
+    <title>Edit Praktikum</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 

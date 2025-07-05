@@ -217,7 +217,7 @@ $laporan = $stmt->get_result();
                     <td class="p-2 border border-gray-400"><?= htmlspecialchars($row['nama_mahasiswa']) ?></td>
                     <td class="p-2 border border-gray-400"><?= htmlspecialchars($row['nama_modul']) ?></td>
                     <td class="p-2 border border-gray-400">
-                        <a href="/uploads/laporan/<?= htmlspecialchars($row['file_laporan']) ?>" download
+                        <a href="/uploads/laporan_praktikum/<?= htmlspecialchars($row['file_laporan']) ?>" download
                             class="text-blue-600 hover:underline">Unduh</a>
                     </td>
                     <td class="p-2 border border-gray-400">
